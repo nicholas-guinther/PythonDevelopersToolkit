@@ -3,7 +3,7 @@
 from flask import redirect, render_template, request
 from todo import app
 # TODO: Import other functions from the API file
-from todo.api import get_tasks
+from todo.api import get_tasks, create_task, finish_task, delete_task
 
 
 @app.route("/")
@@ -19,6 +19,7 @@ def task_create():
     body = request.form["body"]
 
     # TODO: Create a new task using the "body" paramenter
+    create_task(body)
 
     # Redirect user to the main page, so the new task will be displayed
     return redirect("/")
@@ -27,6 +28,7 @@ def task_create():
 @app.route("/delete/<int:task_id>")
 def task_delete(task_id):
     # TODO: Delete task based on task_id
+    delete_task(task_id)
 
     # Redirect user back to the main page, so the list of tasks will be updated
     return redirect("/")
@@ -35,6 +37,6 @@ def task_delete(task_id):
 @app.route("/done/<int:task_id>")
 def task_done(task_id):
     # TODO: Mark task as done using task_id
+    finish_task(task_id)
 
     return redirect("/")
-

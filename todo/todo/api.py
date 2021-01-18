@@ -9,14 +9,20 @@ def get_tasks():
 
 def create_task(body):
     # TODO: add task to the database
-    pass
+    task = Task(body=body)
+    db.session.add(task)
+    db.session.commit()
 
 
 def delete_task(task_id):
     # TODO: delete a task from the database
-    pass
+    task = Task.query.get(task_id)
+    db.session.delete(task)
+    db.session.commit()
 
 
 def finish_task(task_id):
     # TODO: mark task as done
-    pass
+    task = Task.query.get(task_id)
+    task.done = True
+    db.session.commit()
